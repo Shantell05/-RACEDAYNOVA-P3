@@ -1,4 +1,4 @@
-namespace RaceDayNova.Api.Models;
+ namespace RaceDayNova.Api.Models;
 
 /// <summary>Maps to dbo.EventCategories - the bridge that resolves the Events/Categories many-to-many.</summary>
 public class EventCategory
