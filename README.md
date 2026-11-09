@@ -53,7 +53,9 @@ Open `http://localhost:8080`. On Docker Desktop for Windows/macOS, `host.docker.
 - Build the solution, run the API tests, and run the Docker command above before recording the demonstration.
  
 ## GitHub Actions/ CI Workflow
+ <img width="1360" height="673" alt="image" src="https://github.com/user-attachments/assets/2a48038c-07f8-4ba2-926c-297c27aea740" />
  
+
 
 ## YouTube Video Link
 
