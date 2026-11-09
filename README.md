@@ -54,7 +54,8 @@ Open `http://localhost:8080`. On Docker Desktop for Windows/macOS, `host.docker.
  
 ## GitHub Actions/ CI Workflow
  <img width="1360" height="673" alt="image" src="https://github.com/user-attachments/assets/2a48038c-07f8-4ba2-926c-297c27aea740" />
- 
+
+ <img width="1357" height="669" alt="image" src="https://github.com/user-attachments/assets/1cfea90d-35b9-47a1-8f16-ac241670ce47" />
 
 
 ## YouTube Video Link
