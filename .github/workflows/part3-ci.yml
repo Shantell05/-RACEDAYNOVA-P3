@@ -1,0 +1,51 @@
+name: RaceDay Nova Part 3 - MVC Build and Tests
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  validate-part3:
+    name: Validate Part 3 structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Part 3 deliverables
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            "RaceDayNova.sln"
+            "src/RaceDayNova.Mvc/RaceDayNova.Mvc.csproj"
+            "src/RaceDayNova.Mvc/Program.cs"
+            "src/RaceDayNova.Mvc/Services/ApiClient.cs"
+            "src/RaceDayNova.Mvc/Controllers/AuthController.cs"
+            "src/RaceDayNova.Mvc/Controllers/OrganiserController.cs"
+            "src/RaceDayNova.Mvc/Controllers/ParticipantController.cs"
+            "src/RaceDayNova.Mvc/Views/Shared/_Layout.cshtml"
+            "src/RaceDayNova.Mvc/wwwroot/css/site.css"
+            "src/RaceDayNova.Mvc/Dockerfile"
+            "Dockerfile"
+            "README.md"
+          )
+          for file in "${required[@]}"; do test -e "$file" || { echo "::error::Missing $file"; exit 1; }; done
+          grep -q "SendAsync" src/RaceDayNova.Mvc/Services/ApiClient.cs
+          grep -q "docker run" README.md
+  build-test:
+    name: Restore, build and test solution
+    needs: validate-part3
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore RaceDayNova.sln
+      - name: Build Release
+        run: dotnet build RaceDayNova.sln --configuration Release --no-restore
+      - name: Run API tests
+        run: dotnet test tests/RaceDayNova.Tests/RaceDayNova.Tests.csproj --configuration Release --no-build --logger "console;verbosity=normal"
+      - name: Build MVC container image
+        run: docker build -f src/RaceDayNova.Mvc/Dockerfile -t racedaynova-mvc:ci .

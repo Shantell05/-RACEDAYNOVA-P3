@@ -1,0 +1,10 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>@ViewData["Title"] · RaceDay Nova</title><link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /></head><body>
+<header class="topbar"><a class="brand" asp-controller="Home" asp-action="Index"><span class="brand-mark">RN</span><span>RaceDay <b>Nova</b><small>MOVE YOUR WAY</small></span></a><nav class="nav">
+<a asp-controller="Home" asp-action="Index">Explore events</a>
+@if (Context.Session.GetString("UserRole") == "Organiser") { <a asp-controller="Organiser" asp-action="Index">Dashboard</a><a asp-controller="Organiser" asp-action="Events">My events</a><a asp-controller="Organiser" asp-action="Categories">Categories</a> }
+@if (Context.Session.GetString("UserRole") == "Participant") { <a asp-controller="Participant" asp-action="Index">My home</a><a asp-controller="Participant" asp-action="MyEvents">My entries</a><a asp-controller="Participant" asp-action="MyResults">My results</a> }
+@if (Context.Session.GetInt32("UserId").HasValue) { <a asp-controller="Profile" asp-action="Index">Profile</a><span class="user-pill">@Context.Session.GetString("UserName")</span><form asp-controller="Auth" asp-action="Logout" method="post" class="inline"><button class="nav-logout" type="submit">Log out ↗</button></form> } else { <a asp-controller="Auth" asp-action="Login">Log in</a><a class="nav-cta" asp-controller="Auth" asp-action="Register">Join RaceDay</a> }
+</nav></header>
+<main class="page-shell">
+@if (TempData["Success"] != null) { <div class="alert success">✓ @TempData["Success"]</div> } @if (TempData["Error"] != null) { <div class="alert error">@TempData["Error"]</div> }
+@RenderBody()</main><footer class="footer"><div class="footer-brand">RACEDAY <b>NOVA</b></div><span>Find your pace. Find your people.</span><span>Built for South African race communities.</span></footer><script>document.querySelectorAll('[data-confirm]').forEach(x=>x.addEventListener('click',e=>{if(!confirm(x.dataset.confirm))e.preventDefault()}));</script>@await RenderSectionAsync("Scripts", required: false)</body></html>
