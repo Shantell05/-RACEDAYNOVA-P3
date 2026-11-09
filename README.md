@@ -60,4 +60,5 @@ Open `http://localhost:8080`. On Docker Desktop for Windows/macOS, `host.docker.
 
 ## YouTube Video Link
 
+https://youtu.be/KcU54pNc64M?si=3n3uw5Gh6QfOYIys
  
