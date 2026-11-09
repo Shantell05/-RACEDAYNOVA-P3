@@ -1,4 +1,4 @@
-namespace RaceDayNova.Api.Models;
+ namespace RaceDayNova.Api.Models;
 
 /// <summary>Case-insensitive matching helper used by the constant classes below.</summary>
 internal static class Normaliser
