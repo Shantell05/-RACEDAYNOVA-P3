@@ -1,4 +1,4 @@
-namespace RaceDayNova.Api.Models;
+ namespace RaceDayNova.Api.Models;
 
 /// <summary>Maps to dbo.EventWeatherSnapshots - cached weather readings for an event.</summary>
 public class EventWeatherSnapshot
